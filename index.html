@@ -214,6 +214,7 @@
                                         measurementId: "G-NWNZDZVV6G"};
 		const sharedRoom = new URLSearchParams(location.search).get('hogar') || 'mi-hogar';
 		let cloudDatabase = null;
+		let cloudSyncStarted = false;
 		const initialExpenses = [
 			{id:'1',name:'Compra semanal',amount:86.40,category:'Alimentación',date:'2026-08-21',person:'María',icon:'shopping-basket'},
 			{id:'2',name:'Gasolina',amount:52.00,category:'Transporte',date:'2026-08-20',person:'Javier',icon:'fuel'},
@@ -233,8 +234,9 @@
 		async function hashPassword(password){ const bytes=new TextEncoder().encode(password); const digest=await crypto.subtle.digest('SHA-256',bytes); return Array.from(new Uint8Array(digest)).map(byte=>byte.toString(16).padStart(2,'0')).join(''); }
 		function loadUserData(user, firstLogin=false){ const key=userKey(user.email); const stored=JSON.parse(localStorage.getItem('saldo-user-data-'+key)||'null'); if(stored){expenses=stored.expenses||[];incomes=stored.incomes||[];}else{expenses=[];incomes=[];if(firstLogin)localStorage.setItem('saldo-user-data-'+key,JSON.stringify({expenses,incomes}));} }
 		function clearCurrentData(){ expenses=[];incomes=[];document.getElementById('dateFilter').value='';document.getElementById('allDateFilter').value='';document.getElementById('monthlyCategoryFilter').value='all';render(); }
+		function cloudList(value){ if(Array.isArray(value))return value; if(value&&typeof value==='object')return Object.keys(value).sort((a,b)=>Number(a)-Number(b)).map(key=>value[key]); return []; }
 		function save(){ localStorage.setItem('saldo-expenses',JSON.stringify(expenses)); localStorage.setItem('saldo-incomes',JSON.stringify(incomes)); if(activeUser)localStorage.setItem('saldo-user-data-'+userKey(activeUser.email),JSON.stringify({expenses,incomes})); if(cloudDatabase){ cloudDatabase.ref('saldo-hogares/'+sharedRoom+'/expenses').set(expenses);cloudDatabase.ref('saldo-hogares/'+sharedRoom+'/incomes').set(incomes); } }
-		async function restoreCloudData(){ if(!cloudDatabase||!activeUser)return; const [expenseSnapshot,incomeSnapshot]=await Promise.all([cloudDatabase.ref('saldo-hogares/'+sharedRoom+'/expenses').once('value'),cloudDatabase.ref('saldo-hogares/'+sharedRoom+'/incomes').once('value')]); if(Array.isArray(expenseSnapshot.val()))expenses=expenseSnapshot.val();if(Array.isArray(incomeSnapshot.val()))incomes=incomeSnapshot.val();localStorage.setItem('saldo-user-data-'+userKey(activeUser.email),JSON.stringify({expenses,incomes}));render(); }
+		async function restoreCloudData(){ if(!cloudDatabase||!activeUser)return; const [expenseSnapshot,incomeSnapshot]=await Promise.all([cloudDatabase.ref('saldo-hogares/'+sharedRoom+'/expenses').once('value'),cloudDatabase.ref('saldo-hogares/'+sharedRoom+'/incomes').once('value')]); expenses=cloudList(expenseSnapshot.val());incomes=cloudList(incomeSnapshot.val());localStorage.setItem('saldo-user-data-'+userKey(activeUser.email),JSON.stringify({expenses,incomes}));render(); }
 		function render(){
 			const currentMonth = expenses.filter(x=>x.date.startsWith(monthKey())); const total=currentMonth.reduce((s,x)=>s+x.amount,0); const todayTotal=expenses.filter(x=>x.date===today()).reduce((s,x)=>s+x.amount,0); const activeDays=new Set(currentMonth.map(x=>x.date)).size; const incomeTotal=incomes.filter(x=>x.date.startsWith(monthKey())).reduce((s,x)=>s+x.amount,0);
 			document.getElementById('monthTotal').textContent=money(total); document.getElementById('monthCount').textContent=currentMonth.length+' gastos'; document.getElementById('dailyAverage').textContent=money(activeDays?total/activeDays:0); document.getElementById('todayTotal').textContent=money(todayTotal);
@@ -273,13 +275,19 @@
 		document.getElementById('forgotPassword').onclick=async()=>{ const email=document.getElementById('authEmail').value.trim().toLowerCase(); if(!email){toast('Escribe tu correo electrónico primero.');return;} try{ if(FIREBASE_CONFIG.apiKey&&window.firebase){if(!firebase.apps.length)firebase.initializeApp(FIREBASE_CONFIG);await firebase.auth().sendPasswordResetEmail(email);toast('Te enviamos un enlace para recuperar tu contraseña.');}else{const users=JSON.parse(localStorage.getItem('saldo-users')||'{}');toast(users[email]?'En modo local, vuelve a iniciar sesión con tu cuenta registrada.':'No existe una cuenta local con ese correo.');} }catch(error){toast('No se pudo enviar el enlace de recuperación.');} };
 		document.getElementById('notifyBtn').onclick=()=>toast('No tienes notificaciones nuevas'); document.getElementById('settingsBtn').onclick=()=>toast(FIREBASE_CONFIG.apiKey?'Sincronización conectada':'Añade tu configuración Firebase para compartir datos');
 		document.querySelectorAll('.nav-item[data-view]').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.nav-item[data-view]').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.getElementById(btn.dataset.view+'View').classList.add('active');if(btn.dataset.view==='transactions')renderAllTransactions();if(btn.dataset.view==='monthly'){renderMonthly();renderIncomeTransactions();}});
+		function attachCloudListeners(){
+			if(!cloudDatabase||cloudSyncStarted)return;
+			cloudSyncStarted=true;
+			cloudDatabase.ref('saldo-hogares/'+sharedRoom+'/expenses').on('value',snapshot=>{ const remote=cloudList(snapshot.val()); if(activeUser||firebase.auth().currentUser){expenses=remote;localStorage.setItem('saldo-expenses',JSON.stringify(expenses));render();} },error=>{document.getElementById('syncLabel').textContent='Error de sincronización';toast('Firebase no puede leer gastos. Revisa las reglas de Database.');});
+			cloudDatabase.ref('saldo-hogares/'+sharedRoom+'/incomes').on('value',snapshot=>{ const remote=cloudList(snapshot.val()); if(activeUser||firebase.auth().currentUser){incomes=remote;localStorage.setItem('saldo-incomes',JSON.stringify(incomes));render();} },error=>{document.getElementById('syncLabel').textContent='Error de sincronización';toast('Firebase no puede leer ingresos. Revisa las reglas de Database.');});
+			document.getElementById('syncLabel').textContent='Sala '+sharedRoom;
+		}
 		async function startCloudSync(){
 			if(!FIREBASE_CONFIG.apiKey || !window.firebase) return;
 			try{
 				if(!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
 				cloudDatabase=firebase.database();
-			cloudDatabase.ref('saldo-hogares/'+sharedRoom+'/expenses').on('value',snapshot=>{ const remote=snapshot.val(); if(activeUser&&Array.isArray(remote)){expenses=remote;localStorage.setItem('saldo-expenses',JSON.stringify(expenses));render();} }); cloudDatabase.ref('saldo-hogares/'+sharedRoom+'/incomes').on('value',snapshot=>{ const remote=snapshot.val(); if(activeUser&&Array.isArray(remote)){incomes=remote;localStorage.setItem('saldo-incomes',JSON.stringify(incomes));render();} });
-				document.getElementById('syncLabel').textContent='Sala '+sharedRoom;
+				firebase.auth().onAuthStateChanged(user=>{ if(user){ attachCloudListeners();restoreCloudData(); } });
 			}catch(error){ document.getElementById('syncLabel').textContent='Modo local'; }
 		}
 		if(FIREBASE_CONFIG.apiKey) document.getElementById('syncLabel').textContent='Conectando...';
