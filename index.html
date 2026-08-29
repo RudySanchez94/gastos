@@ -22,7 +22,7 @@
             <div class="sidebar-bottom">
                 <div class="workspace"><div class="avatar">MR</div><div class="user-info"><div class="user-name">Mi hogar</div><div class="user-role">3 colaboradores</div></div></div>
                 <div class="workspace-mode" id="workspaceMode">Hogar compartido</div>
-                <button class="nav-item" id="settingsBtn"><i data-lucide="settings-2"></i><span>Configuraci�n</span></button>
+                <button class="nav-item" id="settingsBtn"><i data-lucide="settings-2"></i><span>Configuración</span></button>
                 <button class="nav-item" id="shareBtn"><i data-lucide="share-2"></i><span id="shareBtnLabel">Compartir hogar</span></button>
             </div>
         </aside>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="top-actions">
                     <div class="sync"><i class="sync-dot"></i><span id="syncLabel">Modo local</span></div>
-                    <button class="login-btn" id="loginBtn">Iniciar sesi�n</button>
+                    <button class="login-btn" id="loginBtn">Iniciar sesión</button>
                     <button class="icon-btn" id="notifyBtn" title="Notificaciones"><i data-lucide="bell"></i></button>
                     <button class="share-btn" id="shareBtnTop" title="Compartir hogar"><i data-lucide="share-2"></i></button>
                     <button class="icon-btn" id="toggleModeBtn" title="Cambiar modo"><i data-lucide="network"></i></button>
@@ -44,7 +44,7 @@
             <div class="content">
                 <div class="view active" id="dashboardView">
                     <section class="welcome">
-                        <div><div class="eyebrow">Tu panorama financiero</div><h1>Buenos d�as, <span id="welcomeName">Mar�a</span></h1></div>
+                        <div><div class="eyebrow">Tu panorama financiero</div><h1>Buenos días, <span id="welcomeName">María</span></h1></div>
                         <div class="welcome-actions">
                             <button class="income-button" id="addIncomeBtn"><i data-lucide="arrow-down-to-line"></i>Nuevo ingreso</button>
                             <button class="primary" id="addBtn"><i data-lucide="plus"></i>Nuevo gasto</button>
@@ -53,8 +53,8 @@
 
                     <section class="cards">
                         <article class="stat"><div class="stat-label">Gastado este mes <i data-lucide="wallet-cards"></i></div><div class="stat-value" id="monthTotal">$ 0,00</div><div class="stat-note"><span class="up" id="monthCount">0 gastos</span> registrados</div></article>
-                        <article class="stat"><div class="stat-label">Promedio diario <i data-lucide="chart-no-axes-column-increasing"></i></div><div class="stat-value" id="dailyAverage">$ 0,00</div><div class="stat-note">Basado en d�as con actividad</div></article>
-                        <article class="stat"><div class="stat-label">Gasto de hoy <i data-lucide="calendar-check-2"></i></div><div class="stat-value" id="todayTotal">$ 0,00</div><div class="stat-note">�ltima actualizaci�n <span id="updateTime">ahora</span></div></article>
+                        <article class="stat"><div class="stat-label">Promedio diario <i data-lucide="chart-no-axes-column-increasing"></i></div><div class="stat-value" id="dailyAverage">$ 0,00</div><div class="stat-note">Basado en días con actividad</div></article>
+                        <article class="stat"><div class="stat-label">Gasto de hoy <i data-lucide="calendar-check-2"></i></div><div class="stat-value" id="todayTotal">$ 0,00</div><div class="stat-note">Última actualización <span id="updateTime">ahora</span></div></article>
                         <article class="stat"><div class="stat-label">Disponible acumulado <i data-lucide="target"></i></div><div class="stat-value" id="budgetValue">$ 0.00</div><div class="stat-note"><span class="up" id="budgetPercent">0% disponible</span></div></article>
                         <article class="stat"><div class="stat-label">Ingresos del mes <i data-lucide="trending-up"></i></div><div class="stat-value" id="incomeSummaryTotal">$ 0,00</div><div class="stat-note"><span class="up" id="incomeSummaryBalance">$ 0,00</span> de balance</div><button class="manage-income" id="manageIncomeBtn" type="button">Gestionar ingresos</button></article>
                     </section>
@@ -64,11 +64,11 @@
                             <div class="panel-head">
                                 <div>
                                     <h2>Ritmo de gasto</h2>
-                                    <p class="panel-sub">Comparativa de los �ltimos 7 d�as</p>
+                                    <p class="panel-sub">Comparativa de los últimos 7 días</p>
                                 </div>
                                 <select class="select" id="chartPeriod">
-                                    <option value="7">�ltimos 7 d�as</option>
-                                    <option value="30">�ltimos 30 d�as</option>
+                                    <option value="7">Últimos 7 días</option>
+                                    <option value="30">Últimos 30 días</option>
                                 </select>
                             </div>
                             <div class="chart" id="chart"></div>
@@ -77,7 +77,7 @@
 
                         <article class="panel">
                             <div class="panel-head">
-                                <div><h2>Por categor�a</h2><p class="panel-sub">Distribuci�n del mes</p></div>
+                                <div><h2>Por categoría</h2><p class="panel-sub">Distribución del mes</p></div>
                                 <i data-lucide="more-horizontal" style="color:#718079"></i>
                             </div>
                             <div class="category-list" id="categories"></div>
@@ -123,13 +123,13 @@
                 <div class="view" id="monthlyView">
                     <div class="monthly-header">
                         <div>
-                            <div class="eyebrow">An�lisis mensual</div>
+                            <div class="eyebrow">Análisis mensual</div>
                             <h1 class="monthly-title" id="monthlyTitle">Este mes</h1>
-                            <p class="panel-sub">Una lectura clara de c�mo se distribuyen tus gastos.</p>
+                            <p class="panel-sub">Una lectura clara de cómo se distribuyen tus gastos.</p>
                         </div>
                         <select class="select" id="monthlyCategoryFilter">
-                            <option value="all">Todas las categor�as</option>
-                            <option>Alimentaci�n</option>
+                            <option value="all">Todas las categorías</option>
+                            <option>Alimentación</option>
                             <option>Transporte</option>
                             <option>Hogar</option>
                             <option>Ocio</option>
@@ -140,16 +140,16 @@
 
                     <section class="monthly-summary">
                         <article class="stat"><div class="stat-label">Total del mes <i data-lucide="wallet-cards"></i></div><div class="stat-value" id="monthlyTotal">$ 0,00</div><div class="stat-note" id="monthlyExpensesCount"></div></article>
-                        <article class="stat"><div class="stat-label">D�a de mayor gasto <i data-lucide="calendar-range"></i></div><div class="stat-value" id="monthlyPeak">$ 0,00</div><div class="stat-note" id="monthlyPeakDate"></div></article>
-                        <article class="stat"><div class="stat-label">Categor�a principal <i data-lucide="pie-chart"></i></div><div class="stat-value" id="monthlyTopCategory">-</div><div class="stat-note">Mayor peso en el mes</div></article>
+                        <article class="stat"><div class="stat-label">Día de mayor gasto <i data-lucide="calendar-range"></i></div><div class="stat-value" id="monthlyPeak">$ 0,00</div><div class="stat-note" id="monthlyPeakDate"></div></article>
+                        <article class="stat"><div class="stat-label">Categoría principal <i data-lucide="pie-chart"></i></div><div class="stat-value" id="monthlyTopCategory">-</div><div class="stat-note">Mayor peso en el mes</div></article>
                     </section>
 
                     <section class="panel">
-                        <div class="panel-head"><div><h2>Desglose por categor�a</h2><p class="panel-sub">Importe y participaci�n sobre el total mensual</p></div></div>
+                        <div class="panel-head"><div><h2>Desglose por categoría</h2><p class="panel-sub">Importe y participación sobre el total mensual</p></div></div>
                         <div class="monthly-table-wrap">
                             <table class="monthly-table">
                                 <thead>
-                                    <tr><th>Categor�a</th><th>Movimientos</th><th>Total</th></tr>
+                                    <tr><th>Categoría</th><th>Movimientos</th><th>Total</th></tr>
                                 </thead>
                                 <tbody id="monthlyBreakdown"></tbody>
                             </table>
@@ -171,14 +171,14 @@
     <div class="modal-backdrop" id="modalBackdrop">
         <div class="modal">
             <div class="modal-head">
-                <div><div class="eyebrow">Registro compartido</div><h2 id="modalTitle">A�adir gasto</h2></div>
+                <div><div class="eyebrow">Registro compartido</div><h2 id="modalTitle">Añadir gasto</h2></div>
                 <button class="icon-btn" id="closeModal"><i data-lucide="x"></i></button>
             </div>
             <form id="expenseForm">
                 <div class="form-grid">
                     <label>Concepto<input id="expenseName" required placeholder="Ej. Compra semanal"></label>
                     <label>Importe ($)<input id="expenseAmount" required type="number" min="0.01" step="0.01" placeholder="0,00"></label>
-                    <label>Categor�a<select id="expenseCategory"><option>Alimentaci�n</option><option>Transporte</option><option>Hogar</option><option>Ocio</option><option>Salud</option><option>Otros</option></select></label>
+                    <label>Categoría<select id="expenseCategory"><option>Alimentación</option><option>Transporte</option><option>Hogar</option><option>Ocio</option><option>Salud</option><option>Otros</option></select></label>
                     <label>Fecha<input id="expenseDate" required type="date"></label>
                 </div>
                 <div class="form-actions">
@@ -192,12 +192,12 @@
     <div class="modal-backdrop" id="incomeModalBackdrop">
         <div class="modal">
             <div class="modal-head">
-                <div><div class="eyebrow">Registro compartido</div><h2>A�adir ingreso</h2></div>
+                <div><div class="eyebrow">Registro compartido</div><h2>Añadir ingreso</h2></div>
                 <button class="icon-btn" id="closeIncomeModal"><i data-lucide="x"></i></button>
             </div>
             <form id="incomeForm">
                 <div class="form-grid">
-                    <label>Concepto<input id="incomeName" required placeholder="Ej. N�mina o freelance"></label>
+                    <label>Concepto<input id="incomeName" required placeholder="Ej. Nómina o freelance"></label>
                     <label>Importe ($)<input id="incomeAmount" required type="number" min="0.01" step="0.01" placeholder="0.00"></label>
                     <label>Fecha<input id="incomeDate" required type="date"></label>
                 </div>
@@ -215,34 +215,34 @@
                 <div class="brand-mark"><i data-lucide="leaf"></i></div>
                 <button class="icon-btn" id="closeAuth" title="Cerrar"><i data-lucide="x"></i></button>
             </div>
-            <div class="eyebrow">�rea personal</div>
-            <h2 id="authTitle">Iniciar sesi�n</h2>
+            <div class="eyebrow">Área personal</div>
+            <h2 id="authTitle">Iniciar sesión</h2>
             <p class="auth-copy" id="authCopy">Accede a tu hogar compartido para consultar y registrar gastos desde cualquier dispositivo.</p>
             <form id="authForm">
                 <div class="form-grid">
-                    <label id="authNameField">Tu nombre <span class="auth-name-hint">solo la primera vez</span><input id="authName" placeholder="Ej. Mar�a" autocomplete="name"></label>
-                    <label>Correo electr�nico<input id="authEmail" type="email" required placeholder="tu@correo.com" autocomplete="email"></label>
-                    <label>Contrase�a<input id="authPassword" type="password" required minlength="6" placeholder="M�nimo 6 caracteres" autocomplete="current-password"></label>
+                    <label id="authNameField">Tu nombre <span class="auth-name-hint">solo la primera vez</span><input id="authName" placeholder="Ej. María" autocomplete="name"></label>
+                    <label>Correo electrónico<input id="authEmail" type="email" required placeholder="tu@correo.com" autocomplete="email"></label>
+                    <label>Contraseña<input id="authPassword" type="password" required minlength="6" placeholder="Mínimo 6 caracteres" autocomplete="current-password"></label>
                 </div>
                 <div class="form-actions">
                     <button type="button" class="secondary" id="cancelAuth">Cancelar</button>
                     <button class="primary" id="authSubmit" type="submit">Entrar</button>
                 </div>
             </form>
-            <button class="auth-link" id="forgotPassword" type="button">�Olvidaste tu contrase�a?</button>
-            <button class="auth-switch" id="authSwitch" type="button">�No tienes cuenta? <strong>Crear cuenta</strong></button>
-            <div class="auth-note">El nombre se guarda para tus pr�ximos accesos.</div>
+            <button class="auth-link" id="forgotPassword" type="button">¿Olvidaste tu contraseña?</button>
+            <button class="auth-switch" id="authSwitch" type="button">¿No tienes cuenta? <strong>Crear cuenta</strong></button>
+            <div class="auth-note">El nombre se guarda para tus próximos accesos.</div>
         </div>
     </div>
 
     <div class="auth-backdrop" id="shareBackdrop">
         <div class="share-card">
             <div class="modal-head">
-                <div><div class="eyebrow">Invitaci�n</div><h2>Compartir hogar</h2></div>
+                <div><div class="eyebrow">Invitación</div><h2>Compartir hogar</h2></div>
                 <button class="icon-btn" id="closeShare" title="Cerrar"><i data-lucide="x"></i></button>
             </div>
-            <p class="share-copy">Env�a este enlace a otra persona para que abra la misma sala de gastos compartidos.</p>
-            <div class="share-room"><div class="share-room-label">C�digo de sala</div><div class="share-room-code" id="shareRoomCode"></div></div>
+            <p class="share-copy">Envía este enlace a otra persona para que abra la misma sala de gastos compartidos.</p>
+            <div class="share-room"><div class="share-room-label">Código de sala</div><div class="share-room-code" id="shareRoomCode"></div></div>
             <input class="share-link" id="shareLink" readonly aria-label="Enlace para compartir">
             <div class="form-actions">
                 <button type="button" class="secondary" id="copyShare">Copiar enlace</button>
