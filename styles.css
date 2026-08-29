@@ -186,21 +186,23 @@
 			.share-room{padding:11px;border-radius:8px}.share-room-label{font-size:9px}.share-room-code{font-size:15px;margin-top:4px}
 		}
 		@media(max-width:480px){
-			.content{padding:12px 8px 24px}
-			.welcome{gap:10px;margin-bottom:12px}
-			h1{font-size:19px}
-			.welcome-actions{gap:6px}.welcome-actions button{min-height:36px;padding:7px 5px;font-size:10px}
-			.cards{grid-template-columns:1fr;gap:7px;margin-bottom:12px}
-			.stat{min-height:88px;padding:10px}
-			.stat-value{font-size:15px;margin:8px 0 3px}
+			.content{padding:10px 8px 22px}
+			.welcome{gap:8px;margin-bottom:10px}
+			h1{font-size:18px}
+			.eyebrow{font-size:7px}
+			.welcome-actions{gap:6px}.welcome-actions button{min-height:34px;padding:7px 5px;font-size:10px}
+			.cards{grid-template-columns:1fr;gap:6px;margin-bottom:10px}
+			.stat{min-height:80px;padding:9px 10px 10px;border-radius:7px}
+			.stat-label{font-size:8px}
+			.stat-value{font-size:15px;margin:7px 0 3px}
 			.stat-note{font-size:7px}
-			.panel{padding:12px}
+			.panel{padding:11px;border-radius:8px}
 			.panel-head h2{font-size:13px}
-			.chart{height:136px}.bar{max-width:20px}
-			.monthly-title{font-size:19px}
-			.monthly-summary{grid-template-columns:1fr;gap:7px}.monthly-summary .stat{min-height:84px}
-			.monthly-summary .stat-value{font-size:15px}
-			.transaction{grid-template-columns:22px minmax(0,1fr) auto;gap:6px;padding:8px 0;min-height:auto}
+			.chart{height:128px}.bar{max-width:18px}
+			.monthly-title{font-size:18px}
+			.monthly-summary{grid-template-columns:1fr;gap:6px}.monthly-summary .stat{min-height:78px}
+			.monthly-summary .stat-value{font-size:14px}
+			.transaction{grid-template-columns:22px minmax(0,1fr) auto;gap:6px;padding:7px 0;min-height:auto}
 			.tx-icon{width:22px;height:22px}.tx-amount{font-size:9px}
 			.modal{padding:16px}.modal h2{font-size:16px}
 			input,select{padding:8px;min-height:38px}
