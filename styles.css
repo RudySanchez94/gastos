@@ -50,6 +50,7 @@
 		.login-btn:hover { background:#edf7ef; }
 		.share-btn { width:36px;height:36px; border:1px solid var(--line); background:white; border-radius:8px; color:var(--green); display:grid; place-items:center; min-height:36px; flex-shrink:0; }
 		.share-btn:hover { background:#edf7ef; border-color:#a7c8b1; }
+		.share-btn { touch-action:manipulation; }
 		.icon-btn { width:36px;height:36px; border:1px solid var(--line); background:white; border-radius:8px; color:var(--muted); display:grid; place-items:center; min-height:36px; flex-shrink:0; }
 		.icon-btn:hover { color:var(--green); border-color:#a7c8b1; }
 		.top-home-switch { height:36px; display:flex; align-items:center; gap:6px; padding:0 8px; color:var(--green); background:#edf7ef; border:1px solid #cce2d1; border-radius:8px; font-size:10px; font-weight:700; cursor:pointer; }
@@ -211,7 +212,7 @@
 			.income-total{font-size:18px;margin-top:8px}
 			.income-actions{gap:3px}.income-action{width:23px;height:23px;min-height:23px}
 			.toast{left:12px;right:12px;bottom:76px;text-align:center;font-size:11px;padding:11px 14px}
-			.auth-backdrop{padding:10px;align-items:end}.auth-card,.share-card{width:100%;border-radius:12px;padding:18px;padding-bottom:max(18px,env(safe-area-inset-bottom))}.auth-card h2,.share-card h2{font-size:19px}.auth-copy,.share-copy{font-size:11px}.auth-note{font-size:9px}.auth-link{font-size:10px;margin-top:12px}.auth-switch{font-size:10px;margin-top:12px}
+			.auth-backdrop{padding:10px;align-items:end}.auth-card,.share-card{width:100%;border-radius:12px;padding:18px;padding-bottom:max(18px,env(safe-area-inset-bottom))}.auth-card h2,.share-card h2{font-size:19px}.auth-copy,.share-copy{font-size:11px}.auth-note{font-size:9px}.auth-link{font-size:10px;margin-top:12px}.auth-switch{font-size:10px;margin-top:12px}.share-card{max-height:calc(100dvh - 20px);overflow-y:auto}
 			.profile-card{width:100%;border-radius:12px;padding:18px;padding-bottom:max(18px,env(safe-area-inset-bottom))}.photo-crop-preview{width:190px}.crop-controls label{grid-template-columns:68px 1fr}
 			.share-room{padding:11px;border-radius:8px}.share-room-label{font-size:9px}.share-room-code{font-size:15px;margin-top:4px}
 		}
