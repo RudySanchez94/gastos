@@ -20,10 +20,10 @@
                 <button class="nav-item" data-view="monthly"><i data-lucide="calendar-days"></i><span>Este mes</span></button>
             </nav>
             <div class="sidebar-bottom">
-                <div class="workspace"><div class="avatar">MR</div><div class="user-info"><div class="user-name">Mi hogar</div><div class="user-role">3 colaboradores</div></div></div>
-                <div class="workspace-mode" id="workspaceMode">Hogar compartido</div>
+                <div class="workspace"><button class="profile-photo-button" id="profilePhotoButton" type="button" title="Cambiar foto de perfil"><span class="avatar" data-user-avatar>MR</span><i data-lucide="camera"></i></button><div class="user-info"><div class="user-name">Mi hogar</div><div class="user-role" id="roomMemberSummary">Sin participantes aún</div></div></div>
+                <input id="profilePhotoInput" type="file" accept="image/*" hidden>
                 <button class="nav-item" id="settingsBtn"><i data-lucide="settings-2"></i><span>Configuración</span></button>
-                <button class="nav-item" id="shareBtn"><i data-lucide="share-2"></i><span id="shareBtnLabel">Compartir hogar</span></button>
+                <label class="home-switch-control" for="homeModeToggle"><span class="home-switch-copy"><strong id="homeModeLabel">Hogar compartido</strong><small id="workspaceMode">Sala mi-hogar</small></span><input id="homeModeToggle" type="checkbox" checked><span class="home-switch-slider" aria-hidden="true"></span></label>
             </div>
         </aside>
         <main class="main">
@@ -33,18 +33,17 @@
                     <div class="top-title">Control de gastos</div>
                 </div>
                 <div class="top-actions">
-                    <div class="sync"><i class="sync-dot"></i><span id="syncLabel">Modo local</span></div>
                     <button class="login-btn" id="loginBtn">Iniciar sesión</button>
                     <button class="icon-btn" id="notifyBtn" title="Notificaciones"><i data-lucide="bell"></i></button>
-                    <button class="share-btn" id="shareBtnTop" title="Compartir hogar"><i data-lucide="share-2"></i></button>
-                    <button class="icon-btn" id="toggleModeBtn" title="Cambiar modo"><i data-lucide="network"></i></button>
-                    <div class="avatar orange" data-user-avatar>JD</div>
+                    <button class="share-btn session-required" id="shareBtnTop" title="Compartir hogar"><i data-lucide="share-2"></i></button>
+                    <label class="top-home-switch session-required" for="topHomeModeToggle" title="Conectar a sala"><span id="topHomeModeStatus">Sala</span><input id="topHomeModeToggle" type="checkbox" checked><span class="top-home-switch-slider" aria-hidden="true"></span></label>
+                    <button class="profile-photo-button top-profile-photo-button session-required" id="topProfilePhotoButton" type="button" title="Cambiar foto de perfil"><span class="avatar orange" data-user-avatar>JD</span><i data-lucide="camera"></i></button>
                 </div>
             </header>
             <div class="content">
                 <div class="view active" id="dashboardView">
                     <section class="welcome">
-                        <div><div class="eyebrow">Tu panorama financiero</div><h1><span id="welcomeGreeting">Buenos días</span>, <span id="welcomeName">María</span></h1></div>
+                        <div><div class="eyebrow">Tu panorama financiero</div><h1><span id="welcomeGreeting">Buenos días</span><span id="welcomeName">, María</span></h1></div>
                         <div class="welcome-actions">
                             <button class="income-button" id="addIncomeBtn"><i data-lucide="arrow-down-to-line"></i>Nuevo ingreso</button>
                             <button class="primary" id="addBtn"><i data-lucide="plus"></i>Nuevo gasto</button>
@@ -243,11 +242,29 @@
             </div>
             <p class="share-copy">Envía este enlace a otra persona para que abra la misma sala de gastos compartidos.</p>
             <div class="share-room"><div class="share-room-label">Código de sala</div><div class="share-room-code" id="shareRoomCode"></div></div>
+            <section class="room-members" aria-labelledby="roomMembersTitle"><div class="room-members-head"><span id="roomMembersTitle">Personas en esta sala</span><span id="roomMemberCount"></span></div><div class="member-list" id="roomMembers"></div></section>
             <input class="share-link" id="shareLink" readonly aria-label="Enlace para compartir">
             <div class="form-actions">
                 <button type="button" class="secondary" id="copyShare">Copiar enlace</button>
                 <button type="button" class="primary" id="nativeShare"><i data-lucide="send"></i>Compartir</button>
             </div>
+        </div>
+    </div>
+
+    <div class="auth-backdrop" id="profilePhotoBackdrop">
+        <div class="profile-card">
+            <div class="modal-head"><div><div class="eyebrow">Perfil</div><h2>Foto de perfil</h2></div><button class="icon-btn" id="closeProfilePhoto" type="button" title="Cerrar"><i data-lucide="x"></i></button></div>
+            <p class="profile-copy">Personaliza la imagen que se muestra en tu cuenta.</p>
+            <div class="profile-photo-actions"><button class="primary" id="selectProfilePhoto" type="button"><i data-lucide="image-plus"></i>Cambiar foto</button><button class="secondary" id="removeProfilePhoto" type="button">Eliminar foto</button></div>
+        </div>
+    </div>
+
+    <div class="auth-backdrop" id="cropPhotoBackdrop">
+        <div class="profile-card">
+            <div class="modal-head"><div><div class="eyebrow">Ajustar imagen</div><h2>Encuadra tu foto</h2></div><button class="icon-btn" id="closeCropPhoto" type="button" title="Cerrar"><i data-lucide="x"></i></button></div>
+            <canvas class="photo-crop-preview" id="photoCropPreview" width="480" height="480" aria-label="Vista previa de la foto de perfil"></canvas>
+            <div class="crop-controls"><label>Zoom<input id="photoZoom" type="range" min="1" max="3" step="0.01" value="1"></label><label>Horizontal<input id="photoPositionX" type="range" min="-100" max="100" step="1" value="0"></label><label>Vertical<input id="photoPositionY" type="range" min="-100" max="100" step="1" value="0"></label></div>
+            <div class="form-actions"><button class="secondary" id="cancelCropPhoto" type="button">Cancelar</button><button class="primary" id="saveCroppedPhoto" type="button">Guardar foto</button></div>
         </div>
     </div>
 
