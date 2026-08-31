@@ -191,7 +191,7 @@
 			h1{font-size:18px}
 			.eyebrow{font-size:7px}
 			.welcome-actions{gap:6px}.welcome-actions button{min-height:34px;padding:7px 5px;font-size:10px}
-			.cards{grid-template-columns:1fr;gap:6px;margin-bottom:10px}
+			.cards{grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:10px}
 			.stat{min-height:80px;padding:9px 10px 10px;border-radius:7px}
 			.stat-label{font-size:8px}
 			.stat-value{font-size:15px;margin:7px 0 3px}
