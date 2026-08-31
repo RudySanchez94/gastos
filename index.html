@@ -19,7 +19,7 @@
                 <button class="nav-item" data-view="transactions"><i data-lucide="receipt"></i><span>Movimientos</span></button>
                 <button class="nav-item" data-view="monthly"><i data-lucide="calendar-days"></i><span>Este mes</span></button>
             </nav>
-            <div class="sidebar-bottom">
+            <div class="sidebar-bottom session-required">
                 <div class="workspace"><button class="profile-photo-button" id="profilePhotoButton" type="button" title="Cambiar foto de perfil"><span class="avatar" data-user-avatar>MR</span><i data-lucide="camera"></i></button><div class="user-info"><div class="user-name">Mi hogar</div><div class="user-role" id="roomMemberSummary">Sin participantes aún</div></div></div>
                 <input id="profilePhotoInput" type="file" accept="image/*" hidden>
                 <button class="nav-item" id="settingsBtn"><i data-lucide="settings-2"></i><span>Configuración</span></button>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="top-actions">
                     <button class="login-btn" id="loginBtn">Iniciar sesión</button>
-                    <button class="icon-btn" id="notifyBtn" title="Notificaciones"><i data-lucide="bell"></i></button>
+                    <button class="icon-btn session-required" id="notifyBtn" title="Notificaciones"><i data-lucide="bell"></i></button>
                     <button class="share-btn session-required" id="shareBtnTop" title="Compartir hogar"><i data-lucide="share-2"></i></button>
                     <label class="top-home-switch session-required" for="topHomeModeToggle" title="Conectar a sala"><span id="topHomeModeStatus">Sala</span><input id="topHomeModeToggle" type="checkbox" checked><span class="top-home-switch-slider" aria-hidden="true"></span></label>
                     <button class="profile-photo-button top-profile-photo-button session-required" id="topProfilePhotoButton" type="button" title="Cambiar foto de perfil"><span class="avatar orange" data-user-avatar>JD</span><i data-lucide="camera"></i></button>
