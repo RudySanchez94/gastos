@@ -241,10 +241,13 @@
                 <button class="icon-btn" id="closeShare" title="Cerrar"><i data-lucide="x"></i></button>
             </div>
             <p class="share-copy">Envía este enlace a otra persona para que abra la misma sala de gastos compartidos.</p>
+            <label class="share-room-name">Nombre de la sala<input id="roomNameInput" maxlength="40" placeholder="Mi hogar"></label>
             <div class="share-room"><div class="share-room-label">Código de sala</div><div class="share-room-code" id="shareRoomCode"></div></div>
             <section class="room-members" aria-labelledby="roomMembersTitle"><div class="room-members-head"><span id="roomMembersTitle">Personas en esta sala</span><span id="roomMemberCount"></span></div><div class="member-list" id="roomMembers"></div></section>
+            <section class="room-members room-requests" id="roomRequestsSection" aria-labelledby="roomRequestsTitle"><div class="room-members-head"><span id="roomRequestsTitle">Solicitudes pendientes</span><span id="roomRequestCount"></span></div><div class="member-list" id="roomRequests"></div></section>
             <input class="share-link" id="shareLink" readonly aria-label="Enlace para compartir">
             <div class="form-actions">
+                <button type="button" class="secondary" id="newRoomBtn"><i data-lucide="plus"></i>Nueva sala</button>
                 <button type="button" class="secondary" id="copyShare">Copiar enlace</button>
                 <button type="button" class="primary" id="nativeShare"><i data-lucide="send"></i>Compartir</button>
             </div>
